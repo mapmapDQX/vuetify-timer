@@ -40,24 +40,25 @@
         timerOn: false,
         timerObj: null,
         items: [
-          { time: "５：３０", jewel: "スタート", sec: 325, ontime: false },
-          { time: "４：５５", jewel: "ジュエルラッシュ", sec: 295, ontime: false },
-          { time: "４：３０", jewel: "ボーナスジュエル (内周)", sec: 270, ontime: false },
-          { time: "４：２０", jewel: "ジュエルラッシュ", sec: 260, ontime: false },
-          { time: "３：４５", jewel: "ジュエルラッシュ", sec: 225, ontime: false },
-          { time: "３：３０", jewel: "ボーナスジュエル (外周)", sec: 210, ontime: false },
-          { time: "３：１０", jewel: "ジュエルラッシュ", sec: 190, ontime: false },
-          { time: "２：３５", jewel: "ジュエルラッシュ", sec: 155, ontime: false },
-          { time: "２：３０", jewel: "ボーナスジュエル (内周)", sec: 150, ontime: false },
-          { time: "２：００", jewel: "ジュエルラッシュ", sec: 120, ontime: false },
-          { time: "１：３０", jewel: "ボーナスジュエル (外周)", sec: 90, ontime: false },
-          { time: "１：２５", jewel: "ジュエルラッシュ", sec: 85, ontime: false },
-          { time: "０：５０", jewel: "ジュエルラッシュ", sec: 50, ontime: false },
-          { time: "０：３０", jewel: "ボーナスジュエル (内周)", sec: 30, ontime: false }
+          { time: "５：３０", jewel: "スタート", sec: 325, sound: 1, ontime: false },
+          { time: "４：５５", jewel: "ジュエルラッシュ", sec: 295, sound: 1, ontime: false },
+          { time: "４：３０", jewel: "ボーナスジュエル (内周)", sec: 270, sound: 0, ontime: false },
+          { time: "４：２０", jewel: "ジュエルラッシュ", sec: 260, sound: 1, ontime: false },
+          { time: "３：４５", jewel: "ジュエルラッシュ", sec: 225, sound: 1, ontime: false },
+          { time: "３：３０", jewel: "ボーナスジュエル (外周)", sec: 210, sound: 0, ontime: false },
+          { time: "３：１０", jewel: "ジュエルラッシュ", sec: 190, sound: 1, ontime: false },
+          { time: "２：３５", jewel: "ジュエルラッシュ", sec: 155, sound: 1, ontime: false },
+          { time: "２：３０", jewel: "ボーナスジュエル (内周)", sec: 150, sound: 0, ontime: false },
+          { time: "２：００", jewel: "ジュエルラッシュ", sec: 120, sound: 1, ontime: false },
+          { time: "１：３０", jewel: "ボーナスジュエル (外周)", sec: 90, sound: 0, ontime: false },
+          { time: "１：２５", jewel: "ジュエルラッシュ", sec: 85, sound: 1, ontime: false },
+          { time: "０：５０", jewel: "ジュエルラッシュ", sec: 50, sound: 1, ontime: false },
+          { time: "０：３０", jewel: "ボーナスジュエル (内周)", sec: 30, sound: 0, ontime: false }
         ],
         popup: false,
         popup_sec: 0,
-        popup_message: ""
+        popup_message: "",
+        sound: new Audio(audio)
       }
     },
     methods: {
@@ -72,13 +73,14 @@
         }
         // ジュエルイベント処理
         for (let i = 0; i < this.items.length; i++) {
-          // イベント5秒前からポップアップ表示
+          // イベント5秒前にポップアップ表示
           if (this.sec == this.items[i].sec + 5) {
             this.popup_message = this.items[i].time + " " + this.items[i].jewel
             this.popup_sec = 5
             this.popup = true
-            let sound = new Audio(audio)
-            sound.play();
+            if (this.items[i].sound != 0) {
+              this.sound.play();
+            }
           }
           // イベント時間になったら行の色を変える
           if (this.sec == this.items[i].sec) {
