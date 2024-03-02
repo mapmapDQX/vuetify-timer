@@ -7,7 +7,7 @@
         <v-btn height="60" style="font-size: 30px" color="primary" v-if="timerOn" @click="stop_timer">ストップ</v-btn>
       </v-row>
       <v-row  class="d-flex justify-center">
-        <v-table style="border-top-right-radius: 2px; font-size: 24px">
+        <v-table style="border-top-right-radius: 2px; font-size: 16px" density="compact">
           <template v-slot:default>
             <thead>
               <tr>
