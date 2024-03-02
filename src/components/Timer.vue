@@ -32,6 +32,7 @@
 </template>
 
 <script>
+  import audio from "../assets/決定ボタンを押す20.mp3";
   export default {
     data () {
       return {
@@ -76,6 +77,8 @@
             this.popup_message = this.items[i].time + " " + this.items[i].jewel
             this.popup_sec = 5
             this.popup = true
+            let sound = new Audio(audio)
+            sound.play();
           }
           // イベント時間になったら行の色を変える
           if (this.sec == this.items[i].sec) {
