@@ -25,6 +25,9 @@
         </v-table>
       </v-row>
     </v-col>
+    <v-dialog width="auto" transition="dialog-transition" v-model="popup">
+      <div class="px-2 py-2" style="font-size: 24px; background-color: black;">{{ popup_message }}</div>
+    </v-dialog>
   </v-container>
 </template>
 
@@ -50,20 +53,37 @@
           { time: "１：２５", jewel: "ジュエルラッシュ", sec: 85, ontime: false },
           { time: "０：５０", jewel: "ジュエルラッシュ", sec: 50, ontime: false },
           { time: "０：３０", jewel: "ボーナスジュエル (内周)", sec: 30, ontime: false }
-        ]
+        ],
+        popup: false,
+        popup_sec: 0,
+        popup_message: ""
       }
     },
     methods: {
       // タイマーカウント関数(1秒ごとに呼び出される)
       timer_count: function() {
-        // 残り時間が一致するテーブル行の色を変える
+        // ポップアップ表示処理
+        if (this.popup_sec > 0) {
+          this.popup_sec --;
+          if (this.popup_sec <= 0) {
+            this.popup = false;
+          }
+        }
+        // ジュエルイベント処理
         for (let i = 0; i < this.items.length; i++) {
+          // イベント5秒前からポップアップ表示
           if (this.sec == this.items[i].sec + 5) {
+            this.popup_message = this.items[i].time + " " + this.items[i].jewel
+            this.popup_sec = 5
+            this.popup = true
+          }
+          // イベント時間になったら行の色を変える
+          if (this.sec == this.items[i].sec) {
             this.items[i].ontime = true
           }
         }
         // タイマーカウント処理
-        if(this.sec <= 0) {
+        if (this.sec <= 0) {
           clearInterval(this.timerObj)
           this.timerOn = false
           this.sec = 330
