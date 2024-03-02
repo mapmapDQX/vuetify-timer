@@ -2,9 +2,9 @@
   <v-container class="fill-height">
     <v-col>
       <v-row class="d-flex justify-center" align-content="center">
-        <div class="pr-4" style="font-size: 40px">{{ formatTime }}</div>
-        <v-btn height="60" style="font-size: 30px" color="primary" v-if="!timerOn" @click="start_timer">スタート</v-btn>
-        <v-btn height="60" style="font-size: 30px" color="primary" v-if="timerOn" @click="stop_timer">ストップ</v-btn>
+        <div class="pr-4" style="font-size: 30px">{{ formatTime }}</div>
+        <v-btn height="40" style="font-size: 20px" color="primary" v-if="!timerOn" @click="start_timer">スタート</v-btn>
+        <v-btn height="40" style="font-size: 20px" color="primary" v-if="timerOn" @click="stop_timer">ストップ</v-btn>
       </v-row>
       <v-row  class="d-flex justify-center">
         <v-table style="border-top-right-radius: 2px; font-size: 16px" density="compact">
