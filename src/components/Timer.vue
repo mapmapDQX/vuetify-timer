@@ -26,7 +26,12 @@
       </v-row>
     </v-col>
     <v-dialog width="auto" transition="dialog-transition" v-model="popup">
-      <div class="px-2 py-2" style="font-size: 24px; background-color: black;">{{ popup_message }}</div>
+      <v-card style="background-color: black">
+        <v-card-text>
+          <p class="text-h5 text--primary">{{popup_item_time}}</p>
+          <p class="text-h5 text--primary">{{popup_item_jewel}}</p>
+        </v-card-text>
+      </v-card>
     </v-dialog>
   </v-container>
 </template>
@@ -57,7 +62,8 @@
         ],
         popup: false,
         popup_sec: 0,
-        popup_message: "",
+        popup_item_time: "",
+        popup_item_jewel: "",
         sound: new Audio(audio)
       }
     },
@@ -75,7 +81,8 @@
         for (let i = 0; i < this.items.length; i++) {
           // イベント5秒前にポップアップ表示
           if (this.sec == this.items[i].sec + 5) {
-            this.popup_message = this.items[i].time + " " + this.items[i].jewel
+            this.popup_item_time = this.items[i].time
+            this.popup_item_jewel = this.items[i].jewel
             this.popup_sec = 5
             this.popup = true
             if (this.items[i].sound != 0) {
